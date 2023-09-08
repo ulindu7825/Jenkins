@@ -44,7 +44,5 @@ pipeline {
                 subject: "Build Successful: ${currentBuild.fullDisplayName}",
                 body: "The build was successful."
                 }
-
-        
-        }
+    }
 }
