@@ -35,10 +35,10 @@ pipeline {
             post {
                 success {
                     archiveArtifacts artifacts: '**/target/*.log', allowEmptyArchive: true
-                    emailext subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                              body: "The build was successful.",
-                              attachmentsPattern: '**/target/*.log',
-                              to: 'harshitbal80@gmail.com'
+                        mail to: 'harshitbal80@gmail.com',
+                        subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                        body: "The build was successful.",
+                        attachmentsPattern: '**/target/*.log'
                 }
             }
         }
