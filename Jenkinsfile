@@ -35,8 +35,7 @@ pipeline {
                 success {
                         mail to: "ulinduperera434@gmail.com",
                         subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                        body: "The build was successful.
-                    These are the logs: Harshit is Ullindu's Daddy"
+                        body: "The build was successful. \n These are the logs: Harshit is Ullindu's Daddy"
                         }
                 }
         }
