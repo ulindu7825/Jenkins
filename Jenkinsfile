@@ -30,15 +30,14 @@ pipeline {
         stage('Integration Tests on Staging') {
             steps {
                 echo "Running"
-                // Run your integration tests here and generate log files if any
             }
             post {
                 success {
                     archiveArtifacts artifacts: '**/target/*.log', allowEmptyArchive: true
-                        mail to: 'harshitbal80@gmail.com',
-                        subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                        body: "The build was successful.",
-                        attachmentsPattern: '**/target/*.log'
+                    emailext subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                              body: "The build was successful.",
+                              attachmentsPattern: '**/target/*.log',
+                              to: 'harshitbal80@gmail.com'
                 }
             }
         }
