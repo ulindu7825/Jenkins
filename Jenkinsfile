@@ -54,12 +54,12 @@ pipeline {
     }
     post {
         success {
-            script {
+            
                 def emailBody = ""
-                for (stage in currentBuild.builds) {
-                    emailBody += "Stage: ${stage.result.displayName}\n"
-                    emailBody += "Logs:\n${stage.log}\n\n"
-                }
+                    for (stage in currentBuild.builds) {
+                        emailBody += "Stage: ${stage.result.displayName}\n"
+                        emailBody += "Logs:\n${stage.log}\n\n"
+                
                 mail to: "ulinduperera434@gmail.com",
                 subject: "Build Successful: ${currentBuild.fullDisplayName}",
                 body: "The build was successful.\n\n${emailBody}"
