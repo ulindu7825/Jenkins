@@ -31,63 +31,13 @@ pipeline {
             steps {
                 echo "Running"
             }
-        }
-        stage('Deploy to Production') {
-            steps {
-                echo "Apply AWS CLI or another deployment tool to deploy to production"
-            }
-        }
-    }
-    post {
-        success {
-                mail to: "ulinduperera434@gmail.com",
-                subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                body: "The build was successful."
-                }
-    }
-}pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                echo "Used Maven for the task"
-            }
-        }
-        stage('Unit and Integration Tests') {
-            steps {
-                echo "Applied the NPM Test"
-            }
-        }
-        stage('Code Analysis') {
-            steps {
-                echo "Applied Sonar-Scanner"
-            }
-        }
-        stage('Security Scan') {
-            steps {
-                echo "Applied the security scanning tool to identify vulnerabilities"
-                echo "Trying npm audit"
+            post {
                 success {
-                mail to: "ulinduperera434@gmail.com",
-                subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                body: "The build was successful."
+                        mail to: "ulinduperera434@gmail.com",
+                        subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                        body: "The build was successful."
+                        }
                 }
-            }
-        }
-        stage('Deploy to Staging') {
-            steps {
-                echo "Apply AWS CLI or another deployment tool to deploy to staging"
-            }
-        }
-        stage('Integration Tests on Staging') {
-            steps {
-                echo "Running"
-                success {
-                mail to: "ulinduperera434@gmail.com",
-                subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                body: "The build was successful."
-                }
-            }
         }
         stage('Deploy to Production') {
             steps {
