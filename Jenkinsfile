@@ -95,6 +95,6 @@ pipeline {
                      subject: "Build Failed: ${currentBuild.fullDisplayName}",
                      body: "The build has failed. Please check the logs for details.\n\nLogs:\n\n$emailBody"
             }
-        }
+        }
     }
 }
