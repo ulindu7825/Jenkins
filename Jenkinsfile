@@ -3,46 +3,98 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Used Maven for the task"
+                script {
+                    echo "Use Maven"
+                    currentBuild.rawBuild.getLog(1000).each { line ->
+                        echo "Build: $line"
+                    }
+                }
             }
         }
         stage('Unit and Integration Tests') {
             steps {
-                echo "Applied the NPM Test"
+                script {
+                    echo "Use NPM Test"
+                    currentBuild.rawBuild.getLog(1000).each { line ->
+                        echo "Unit and Integration Tests: $line"
+                    }
+                }
             }
         }
         stage('Code Analysis') {
             steps {
-                echo "Applied Sonar-Scanner"
+                script {
+                    echo "Try Sonar-Scanner"
+                    currentBuild.rawBuild.getLog(1000).each { line ->
+                        echo "Code Analysis: $line"
+                    }
+                }
             }
         }
         stage('Security Scan') {
             steps {
-                echo "Applied the security scanning tool to identify vulnerabilities"
-                echo "Trying npm audit"
+                script {
+                    echo "Use a security scanning tool to identify vulnerabilities"
+                    echo "Trying npm audit"
+                    currentBuild.rawBuild.getLog(1000).each { line ->
+                        echo "Security Scan: $line"
+                    }
+                }
             }
         }
         stage('Deploy to Staging') {
             steps {
-                echo "Apply AWS CLI or another deployment tool to deploy to staging"
+                script {
+                    echo "Use AWS CLI or other deployment tool to deploy to staging"
+                    currentBuild.rawBuild.getLog(1000).each { line ->
+                        echo "Deploy to Staging: $line"
+                    }
+                }
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                echo "Running"
+                script {
+                    echo "Running"
+                    currentBuild.rawBuild.getLog(1000).each { line ->
+                        echo "Integration Tests on Staging: $line"
+                    }
+                }
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo "Apply AWS CLI or another deployment tool to deploy to production"
+                script {
+                    echo "Use AWS CLI or other deployment tool to deploy to production"
+                    currentBuild.rawBuild.getLog(1000).each { line ->
+                        echo "Deploy to Production: $line"
+                    }
+                }
             }
         }
     }
     post {
         success {
-                mail to: "ulinduperera434@gmail.com",
-                subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                body: "The build was successful."
+            script {
+                def emailBody = ""
+                currentBuild.rawBuild.getLog(1000).each { line ->
+                    emailBody += line + '\n'
                 }
-    }
+                mail to: "harshitbal80@gmail.com",
+                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                     body: "The build was successful.\n\nLogs:\n\n$emailBody"
+            }
+        }
+        failure {
+            script {
+                def emailBody = ""
+                currentBuild.rawBuild.getLog(1000).each { line ->
+                    emailBody += line + '\n'
+                }
+                mail to: "harshitbal80@gmail.com",
+                     subject: "Build Failed: ${currentBuild.fullDisplayName}",
+                     body: "The build has failed. Please check the logs for details.\n\nLogs:\n\n$emailBody"
+            }
+        }
+    }
 }
