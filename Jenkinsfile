@@ -30,14 +30,17 @@ pipeline {
         stage('Integration Tests on Staging') {
             steps {
                 echo "Running"
+                // Run your integration tests here and generate log files if any
             }
             post {
                 success {
-                        mail to: "ulinduperera434@gmail.com",
-                        subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                        body: "The build was successful. \n These are the logs: Harshit is Ullindu's Daddy"
-                        }
+                    archiveArtifacts artifacts: '**/target/*.log', allowEmptyArchive: true
+                    emailext subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                              body: "The build was successful.",
+                              attachmentsPattern: '**/target/*.log',
+                              to: 'ulinduperera434@gmail.com'
                 }
+            }
         }
         stage('Deploy to Production') {
             steps {
