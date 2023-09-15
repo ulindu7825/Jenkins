@@ -17,23 +17,12 @@ pipeline{
                 echo "Intergration tests completed."
             }
             post {
-                failure {
-                    emailext(
-                        to: 'ulinduperera434@gmail.com',
-                        subject: "Unit and Integration Test Failed",
-                        body: 'Unit and Integration Test failed. Please check attached logs for more details.',
-                        attachLog: true 
-                    )      
-                }
                 success {
-                    emailext(
-                        to: 'ulinduperera434@gmail.com',
-                        subject: 'Unit and Integration Test Succeeded',
-                        body: 'Unit and Integration Test succeeded.Please Check attached logs for more details.',
-                        attachLog: true     
-                    ) 
+                        mail to:"ulinduperera44@gmail.com",
+                        subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                        body: "The build was successful. \n Unit and Integration Tests: ${attachLog: true}"
+                        }
                 }
-            }
 
         }
 
@@ -50,23 +39,13 @@ pipeline{
                 echo "Security scans succesfully completed"
             }
             post {
-                failure {
-                    emailext(
-                        to: 'ulinduperera434@gmail.com',
-                        subject: 'Security Scan Failed',
-                        body: 'Security Scan failed.Please Check attached logs for more details.',
-                        attachLog: true  
-                    ) 
-                }
                 success {
-                    emailext(
-                        to: 'ulinduperera434@gmail.com',
-                        subject: 'Security Scan Succeeded',
-                        body: 'Security Scan succeeded.Please check attached logs for details.',
-                        attachLog: true 
-                    )   
+                        mail to:"ulinduperera44@gmail.com",
+                        subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                        body: "The build was successful. \n Security Scan: ${attachLog: true}"
+                        }
                 }
-            }
+
         }
 
         stage('Deploy to Staging'){
