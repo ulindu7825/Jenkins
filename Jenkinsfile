@@ -34,9 +34,12 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'harshitbal80@gmail.com',
-                    subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                    body: "The build was successful."
+                    emailtext(
+                        to: 'harshitbal80@gmail.com',
+                        subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                        body: "The build was successful.",
+                        attachLog: true
+                    )
                 }
             }
         }
