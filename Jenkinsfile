@@ -36,6 +36,7 @@ pipeline{
             steps{
                 echo "Security scans started with 42Crunch"
                 echo "Security scans succesfully completed"
+            }
              post {
                 success {
                         mail to:"ulinduperera44@gmail.com",
@@ -43,7 +44,6 @@ pipeline{
                         body: "The build was successful. \n Security Scan: ${attachLog: true}"
                 }
             }
-        }
         }
 
         stage('Deploy to Staging'){
