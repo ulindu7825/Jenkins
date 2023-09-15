@@ -21,9 +21,8 @@ pipeline{
                         mail to:"ulinduperera44@gmail.com",
                         subject: "Build Successful: ${currentBuild.fullDisplayName}",
                         body: "The build was successful. \n Unit and Integration Tests: ${attachLog: true}"
-                        }
                 }
-
+            }
         }
 
         stage('Code Analysis'){
@@ -37,15 +36,14 @@ pipeline{
             steps{
                 echo "Security scans started with 42Crunch"
                 echo "Security scans succesfully completed"
-            }
-            post {
+             post {
                 success {
                         mail to:"ulinduperera44@gmail.com",
                         subject: "Build Successful: ${currentBuild.fullDisplayName}",
                         body: "The build was successful. \n Security Scan: ${attachLog: true}"
-                        }
                 }
-
+            }
+        }
         }
 
         stage('Deploy to Staging'){
