@@ -34,7 +34,7 @@ pipeline {
             }
             post {
                 success {
-                    emailtext(
+                    emailext(
                         to: 'harshitbal80@gmail.com',
                         subject: "Build Successful: ${currentBuild.fullDisplayName}",
                         body: "The build was successful.",
