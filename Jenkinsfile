@@ -42,6 +42,7 @@ pipeline{
                         mail to:"ulinduperera434@gmail.com",
                         subject: "Build Successful: ${currentBuild.fullDisplayName}",
                         body: "The build was successful. \n Security Scan: ${attachLog: true}"
+                        attachment:attachLog: true
                 }
             }
         }
