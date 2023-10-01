@@ -4,29 +4,36 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Code fetched from https://github.com/manubalhara/Jenkins-Project.git"
-                echo "Building Initiated using Maven"
+               
+                echo "Building launched using Maven"
                 echo "Build successful"
             }
         }
 
         stage('Unit and Integration Tests') {
             steps {
-                echo "Unit tests Initiated with NUint"
-                echo "Unit tests completed."
+                echo "Unit tests launched with NUint"
+                echo "Unit tests successful."
                 echo "Integration tests started with Selenium"
-                echo "Integration tests completed."
+                echo "Integration tests successful."
             }
             
        post {
         success {
-            echo "Unit and Integration Tests stage succeeded"  // Add this line for debugging
-
-            // Send an email with the archived log files
+            echo "Unit and Integration Tests stage is completed."  // Input the line when debugging
             emailext(
-                to: 'ulinduperera@live.com',
-                subject: "Build Status: ${currentBuild.result}",
-                body: "Build Status: ${currentBuild.result}",
+                to: 'ulinduperera434@gmail.com',
+                subject:"Current Stage Status:  ${currentBuild.result}",
+                body:"Please check the log file attached to the email for details.",
+                attachLog: true
+            )
+        }
+        failure {
+            echo "Unit and Integration Tests stage failed"  // Input the line when debugging
+            emailext(
+                to: 'ulinduperera434@gmail.com',
+                subject:"Current Stage Status:  ${currentBuild.result}",
+                body:"Please check the log file attached to the email for details.",
                 attachLog: true
             )
         }
@@ -35,41 +42,50 @@ pipeline {
 
         stage('Code Analysis') {
             steps {
-                echo "Code analysis started with Veracode"
+                echo "Code analysis initiated with Veracode"
                 echo "Code analysis successfully completed"
             }
         }
 
         stage('Security Scan') {
             steps {
-                echo "Security scans started with 42Crunch"
+                echo "Security scans initiated with 42Crunch"
                 echo "Security scans successfully completed"
             }
             
-            post {
-                success {
-                    mail to: "ulinduperera@live.com",
-                    subject: "Security Scan Successful: ${currentBuild.fullDisplayName}",
-                    body: "The security scan was successful."
-                }
-                failure {
-                    mail to: "ulinduperera@live.com",
-                    subject: "Security Scan Failed: ${currentBuild.fullDisplayName}",
-                    body: "The security scan has failed. Please check the logs for details."
-                }
-            }
+                   post {
+        success {
+            echo "Unit and Integration Tests stage completed"  // Input the line when debugging
+            emailext(
+                to: 'ulinduperera434@gmail.com',
+                subject:"Current Stage Status:  ${currentBuild.result}",
+                body:"Please check the log file attached to the email for details.",
+                attachLog: true
+            )
         }
+
+        failure {
+            echo "Security Scan Test stage failed"  // Input the line when debugging
+            emailext(
+                to: 'ulinduperera434@gmail.com',
+                subject:"Current Stage Status:  ${currentBuild.result}",
+                body:"Please check the log file attached to the email for details.",
+                attachLog: true
+            )
+        }
+    }
+    }
 
         stage('Deploy to Staging') {
             steps {
-                echo "Staging deployment started"
+                echo "Stage deployment initiated"
                 echo "Deployed to AWS EC2 instance-id: i-4214535890abcdef0 staging server"
             }
         }
 
         stage('Integration Tests on Staging') {
             steps {
-                echo "Integration tests started with Selenium"
+                echo "Integration tests initiated with Selenium"
                 echo "Integration tests completed successfully."
             }
         }
@@ -79,6 +95,6 @@ pipeline {
                 echo "Production deployment started"
                 echo "Deployed to AWS EC2 instance-i-4214535890abcdef0 production server"
             }
-        }
-    }
+        }
+    }
 }
