@@ -26,7 +26,7 @@ pipeline {
 
             // Send an email with the archived log files
             emailext(
-                to: 'harshitbal80@gmail.com',
+                to: 'ulinduperera@live.com',
                 subject: "Build Status: ${currentBuild.result}",
                 body: "Build Status: ${currentBuild.result}",
                 attachmentsPattern: '**/logs/*.log'
@@ -50,12 +50,12 @@ pipeline {
             
             post {
                 success {
-                    mail to: "harshitbal80@gmail.com",
+                    mail to: "ulinduperera@live.com",
                     subject: "Security Scan Successful: ${currentBuild.fullDisplayName}",
                     body: "The security scan was successful."
                 }
                 failure {
-                    mail to: "harshitbal80@gmail.com",
+                    mail to: "ulinduperera@live.com",
                     subject: "Security Scan Failed: ${currentBuild.fullDisplayName}",
                     body: "The security scan has failed. Please check the logs for details."
                 }
