@@ -25,7 +25,7 @@ pipeline {
             archiveArtifacts artifacts: '**/logs/*.log', allowEmptyArchive: true
 
             // Send an email with the archived log files
-            emaitext(
+            emailext(
                 to: 'ulinduperera@live.com',
                 subject: "Build Status: ${currentBuild.result}",
                 body: "Build Status: ${currentBuild.result}",
