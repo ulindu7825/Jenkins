@@ -29,7 +29,7 @@ pipeline {
                 to: 'ulinduperera@live.com',
                 subject: "Build Status: ${currentBuild.result}",
                 body: "Build Status: ${currentBuild.result}",
-                attachmentsPattern: ''build/**/logs/*.log'
+                attachmentsPattern: 'build/**/logs/*.log'
             )
         }
     }
