@@ -22,14 +22,14 @@ pipeline {
         success {
             echo "Unit and Integration Tests stage succeeded"  // Add this line for debugging
             // Archive the log files or any other artifacts you want to attach to the email
-            archiveArtifacts artifacts: '**/logs/*.log', allowEmptyArchive: true
+            archiveArtifacts artifacts: '**/*.log', allowEmptyArchive: true
 
             // Send an email with the archived log files
             emailext(
                 to: 'ulinduperera@live.com',
                 subject: "Build Status: ${currentBuild.result}",
                 body: "Build Status: ${currentBuild.result}",
-                attachmentsPattern: '**/logs/*.log'
+                attachmentsPattern: '**/*.log'
             )
         }
     }
