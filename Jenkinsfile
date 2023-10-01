@@ -24,7 +24,7 @@ pipeline {
             emailext(
                 to: 'ulinduperera434@gmail.com',
                 subject:"Current Stage Status:  ${currentBuild.result}",
-                body:"Please check the log file attached to the email for details.",
+                body:"Unit and Integration Tests stage is completed.",
                 attachLog: true
             )
         }
@@ -33,7 +33,7 @@ pipeline {
             emailext(
                 to: 'ulinduperera434@gmail.com',
                 subject:"Current Stage Status:  ${currentBuild.result}",
-                body:"Please check the log file attached to the email for details.",
+                body:"Unit and Integration Tests stage is completed.",
                 attachLog: true
             )
         }
@@ -55,11 +55,10 @@ pipeline {
             
                    post {
         success {
-            echo "Unit and Integration Tests stage completed"  // Input the line when debugging
             emailext(
                 to: 'ulinduperera434@gmail.com',
                 subject:"Current Stage Status:  ${currentBuild.result}",
-                body:"Please check the log file attached to the email for details.",
+                body:"Security Scan completed.",
                 attachLog: true
             )
         }
@@ -69,7 +68,7 @@ pipeline {
             emailext(
                 to: 'ulinduperera434@gmail.com',
                 subject:"Current Stage Status:  ${currentBuild.result}",
-                body:"Please check the log file attached to the email for details.",
+                body:"Security Scan completed.",
                 attachLog: true
             )
         }
