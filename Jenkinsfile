@@ -95,6 +95,6 @@ pipeline {
                 echo "Production deployment started"
                 echo "Deployed to AWS EC2 instance-i-4214535890abcdef0 production server"
             }
-        }
-    }
+        }
+    }
 }
